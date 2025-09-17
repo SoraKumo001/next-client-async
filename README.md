@@ -5,7 +5,7 @@
 
 このサンプルではサーバ上で非同期データを取得し HTML で出力、ブラウザ上で Hydration して動作します
 
-重要な点は、`throw property.promise`の部分です。ここで Promise が解決された際に、コンポーネントが再レンダリングされます。この機能は React の`renderToReadableStream`実行時の標準動作です。`<Suspense>`で囲むと、非同期待ちではなくストリーミングになってしまうので注意が必要です。
+重要な点は、`throw property.promise`の部分です。ここで Promise が解決された際に、コンポーネントが再レンダリングされます。この機能は React の`renderToReadableStream`実行時の標準動作です。`<Suspense>`で囲むと、非同期待ちではなくストリーミングになってしまうので注意が必要です
 
 ```tsx
 "use client";
