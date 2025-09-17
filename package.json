@@ -1,0 +1,21 @@
+{
+  "name": "next-client-async",
+  "version": "1.0.0",
+  "scripts": {
+    "dev": "next",
+    "start": "next start",
+    "build": "next build"
+  },
+  "dependencies": {
+    "next": "15.5.3"
+  },
+  "devDependencies": {
+    "@types/node": "24.5.0",
+    "@types/react": "19.1.13",
+    "typescript": "5.9.2"
+  },
+  "main": "index.js",
+  "repository": "https://github.com/SoraKumo001/next-client-async",
+  "author": "SoraKumo <info@croud.jp>",
+  "license": "MIT"
+}
