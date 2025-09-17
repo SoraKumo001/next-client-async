@@ -1,6 +1,6 @@
 # next-client-ssr
 
-クライアントコンポーネントをサーバ上で動かす際、非同期処理が出来ないという誤解があります  
+クライアントコンポーネントをサーバ上で動かす際、async/await が使えないという誤解があります  
 その誤解を解くために最小限のサンプルを用意しました
 
 このサンプルではサーバ上で非同期データを取得し HTML で出力、ブラウザ上で Hydration して動作します
@@ -14,7 +14,7 @@ import { useRef, useSyncExternalStore, type FC } from "react";
 const DATA_NAME = "DATA_TEST";
 
 const Weather: FC<{
-  property: { data?: unknown; promise?: Promise<unknown> };
+  property: { data?: unknown; promise?: Promise<void> };
 }> = ({ property }) => {
   const data = useSyncExternalStore(
     () => () => {},
@@ -27,11 +27,13 @@ const Weather: FC<{
           property.data = JSON.parse(node.innerHTML);
         } else if (!property.promise) {
           // サーバ側で天気予報データを取得
-          property.promise = fetch(
-            `https://www.jma.go.jp/bosai/forecast/data/overview_forecast/130000.json`
-          )
-            .then((r) => r.json())
-            .then((v) => (property.data = v));
+          const getWeather = async () => {
+            const result = await fetch(
+              `https://www.jma.go.jp/bosai/forecast/data/overview_forecast/130000.json`
+            );
+            property.data = await result.json();
+          };
+          property.promise = getWeather();
           // Promiseを解決後、再レンダリングさせる
           throw property.promise;
         }
@@ -59,7 +61,7 @@ const Weather: FC<{
 const Page = () => {
   const property = useRef<{
     data?: unknown;
-    promise?: Promise<unknown>;
+    promise?: Promise<void>;
   }>({}).current;
   return <Weather property={property} />;
 };
