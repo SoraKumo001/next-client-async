@@ -30,7 +30,7 @@ const Weather: FC<{
           const node = document.getElementById(DATA_NAME);
           property.data = JSON.parse(node.innerHTML);
         } else if (!property.promise) {
-          // サーバ側で天気予報データを取得
+          // サーバ(物理)動作時に天気予報データを取得
           const getWeather = async () => {
             const result = await fetch(
               `https://www.jma.go.jp/bosai/forecast/data/overview_forecast/130000.json`
