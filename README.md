@@ -7,6 +7,10 @@
 
 重要な点は、`throw property.promise`の部分です。ここで Promise が解決された際に、コンポーネントが再レンダリングされます。この機能は React の`renderToReadableStream`実行時の標準動作です。`<Suspense>`で囲むと、非同期待ちではなくストリーミングになってしまうので注意が必要です
 
+- サンプルを Vercel にデプロイしたもの
+
+https://next-client-async.vercel.app/
+
 ```tsx
 "use client";
 import { useRef, useSyncExternalStore, type FC } from "react";
