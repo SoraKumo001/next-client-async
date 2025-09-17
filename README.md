@@ -46,6 +46,7 @@ const Weather: FC<{
         id={DATA_NAME}
         type="application/json"
         dangerouslySetInnerHTML={{
+          // データをJSON文字列に変換と、HTML用にエスケープ
           __html: JSON.stringify(data).replace(/</g, "\\u003c"),
         }}
       />
